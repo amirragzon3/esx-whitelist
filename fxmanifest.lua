@@ -1,26 +1,34 @@
 fx_version 'cerulean'
 game 'gta5'
 
-author 'Mirza'
-description 'Whitelist with Login/Register panel (Adaptive Card deferrals)'
-version '3.3.0'
+author 'amirragzon3'
+description 'A lightweight, database-driven whitelist system for FiveM servers running the ESX Framework'
+version '1.0.0'
+
+repository 'https://github.com/amirragzon3/esx-whitelist'
+
+-- ESX Framework dependency
+dependencies {
+  'es_extended',
+  'oxmysql'
+}
 
 shared_script 'config.lua'
 
--- Use ONE of these lines to match your server (optional; auto-detect works without it):
--- server_scripts { '@mysql-async/lib/MySQL.lua', 'server.lua' }
--- server_scripts { '@oxmysql/lib/MySQL.lua', 'server.lua' }
-server_script 'server.lua'
-client_script 'client.lua'
-
-dependencies {
-    'mysql-async'
+server_scripts {
+  'server.lua'
 }
 
+client_scripts {
+  'client.lua'
+}
+
+-- Lua 5.4 support
+lua54 'yes'
+
+-- Server exports for integration
 server_exports {
-    'GetPlayerSteamId',
-    'GetAccountUsername',
-    'GetSyntheticSteam',
-    'HasRealSteam',
-    'EnsureSyntheticSteam'
+  'IsPlayerWhitelisted',
+  'AddToWhitelist',
+  'RemoveFromWhitelist'
 }
